@@ -41,6 +41,7 @@ Everything is monthly USD unless noted.
 import argparse
 import json
 import math
+import sys
 
 COMPANY_NAME = "{{COMPANY_NAME}}"  # Set your company name here (filled in during kit setup)
 
@@ -157,6 +158,39 @@ def gm(price, cost):
     return (price * (1 - PROC_FEE) - cost) / price * 100 if price else 0.0
 
 
+OPTION_KEYS = set(UNITS) | {"name", "recommended", "agents", "value_factors", "onsite_hours"}
+
+
+def check_inputs(opt, years, label="option"):
+    """List every input problem that would otherwise price silently wrong. A misspelled line
+    ("workstations") was skipped and priced at $0, a misspelled value factor dropped its uplift,
+    and an unknown agent crashed with a bare KeyError."""
+    problems = []
+    for key in sorted(set(opt) - OPTION_KEYS):
+        problems.append(f"{label}: unknown key '{key}' (it would be skipped, so a misspelled "
+                        f"line would price at $0)")
+    for a in opt.get("agents", []):
+        if a not in AGENTS:
+            problems.append(f"{label}: unknown agent '{a}' (valid: {', '.join(AGENTS)})")
+    for f in opt.get("value_factors", []):
+        if f not in VALUE_FACTORS:
+            problems.append(f"{label}: unknown value factor '{f}' "
+                            f"(valid: {', '.join(VALUE_FACTORS)})")
+    for key in list(UNITS) + ["onsite_hours"]:
+        if opt.get(key, 0) < 0:
+            problems.append(f"{label}: '{key}' is negative ({opt[key]})")
+    if not MIN_YEARS <= years <= MAX_YEARS:
+        problems.append(f"years must be {MIN_YEARS} to {MAX_YEARS}, got {years}")
+    return problems
+
+
+def stop_on_problems(problems):
+    if problems:
+        valid = ", ".join(sorted(OPTION_KEYS))
+        sys.exit("Input problems, nothing priced:\n  " + "\n  ".join(problems)
+                 + f"\nValid option keys: {valid}")
+
+
 def price_option(opt, users, years):
     """Return per-line rows and monthly totals for one assembled option."""
     agents = opt.get("agents", [])
@@ -205,6 +239,10 @@ def detail_block(rows, t):
     L.append("-" * 66)
     L.append(f"{'MONTHLY':16}{'':>4}{t['cost']:>8.0f}{t['floor']:>8.0f}"
              f"{t['anchor']:>8.0f}{t['contract']:>8.0f}{t['start']:>8.0f}")
+    L.append(f"{yr_hdr} = the anchor at a {t['years']}-year term: the realistic landing, "
+             f"internal only.")
+    L.append("GM is measured at that landing price. The client-facing ladder starts from "
+             "START, so its figures are higher.")
     return "\n".join(L)
 
 
@@ -237,7 +275,8 @@ def single_report(rows, t):
     L.append("THE BAND (internal, monthly):")
     L.append(f"  Floor (walk-away)      ${t['floor']:,.0f}")
     L.append(f"  Anchor (1-yr standard) ${t['anchor']:,.0f}")
-    cap = " (capped)" if t["value_mult"] >= START_CAP else ""
+    L.append(f"  Landing (anchor, {t['years']}-yr) ${t['contract']:,.0f}")
+    cap =" (capped)" if t["value_mult"] >= START_CAP else ""
     note = f"+{(t['value_mult']-1)*100:.0f}% value{cap}" if t["value_uplift"] else "no value factors"
     L.append(f"  START (opening ask)    ${t['start']:,.0f}   ({note})")
     L.append("")
@@ -256,7 +295,11 @@ def packages_report(client):
     users = client.get("users", 0)
     years = client.get("years", 1)
     name = client.get("client", "Client")
-    priced = [price_option(o, users, years) for o in client["options"]]
+    problems = []
+    for i, o in enumerate(client["options"], 1):
+        problems += check_inputs(o, years, f"option {i} ({o.get('name', 'unnamed')})")
+    stop_on_problems(sorted(set(problems), key=problems.index))
+    priced =[price_option(o, users, years) for o in client["options"]]
 
     L = ["=" * 78, f"{COMPANY_NAME}  -  PROPOSAL OPTIONS for {name}  (internal)",
          f"{len(priced)} options assembled from building blocks | terms 1/2/3/5 yr | "
@@ -281,6 +324,7 @@ def packages_report(client):
     def money(v):
         return f"{'$' + format(v, ',.0f'):>14}"
     for label, key in [("Floor (walk-away)", "floor"), ("Anchor (1-yr standard)", "anchor"),
+                       (f"Landing (anchor, {years}-yr)", "contract"),
                        ("START (open here)", "start")]:
         L.append(f"{label:22}" + "".join(money(t[key]) for _, t in priced))
     if users:
@@ -339,6 +383,7 @@ def main():
     opt["onsite_hours"] = args.onsite_hours
     opt["agents"] = [a for a in AGENTS if getattr(args, a)]
     opt["value_factors"] = [f for f in VALUE_FACTORS if getattr(args, f)]
+    stop_on_problems(check_inputs(opt, args.years, "flags"))
     rows, totals = price_option(opt, args.users, args.years)
     print(single_report(rows, totals))
 

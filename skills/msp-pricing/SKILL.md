@@ -150,7 +150,11 @@ then:
     python3 scripts/price_quote.py --packages client.json
 
 It prices every option (floor, anchor, contract price for the term, opening START, per-user, margin
-at every line) and prints a side-by-side. For a quick one-off check, the CLI flags work too:
+at every line) and prints a side-by-side. The per-line term column and the "Landing" row are the
+anchor at the client's term, an internal number; the client-facing ladder starts from START and is
+the only set of prices a client sees. If the JSON misspells a line, agent, or value factor, or has a
+negative count, the script stops and names the problem rather than pricing it silently wrong. For a
+quick one-off check, the CLI flags work too:
 
     python3 scripts/price_quote.py --workstation 24 --mobile 5 --server 1 --users 25 \
         --years 3 --edr --ztna --onsite-hours 2 --compliance --downtime-sensitive

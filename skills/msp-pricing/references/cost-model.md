@@ -207,14 +207,18 @@ blocks (the JSON for this lives alongside the script as a template):
 |---------|------|-------------|---------------|
 | Floor (walk-away) | $3,140 | $4,160 | $4,820 |
 | Anchor (1-yr standard) | $3,980 | $5,130 | $6,110 |
+| Landing (anchor at the 3-yr term, internal) | $3,666 | $4,714 | $5,628 |
 | START (open here, internal) | $3,980 | $7,065 | $8,665 |
 | Client 1-yr (highest) | $3,980 | $7,065 | $8,665 |
 | Client 2-yr | $3,820 | $6,780 | $8,320 |
 | Client 3-yr | $3,660 | $6,500 | $7,970 |
 | Client 5-yr | $3,345 | $5,935 | $7,280 |
 
-The first three rows are internal (where you walk away, your standard, and where you open). The four
-Client rows are what goes on the quote: the term ladder, topped by the 1-year minimum term.
+The first four rows are internal (where you walk away, your standard, the realistic landing at the
+term under discussion, and where you open). The four Client rows are what goes on the quote: the
+term ladder, topped by the 1-year minimum term. The Landing row and the Client 3-yr row are
+different numbers on purpose: the landing discounts the anchor, while the client ladder discounts
+START. Never read a Landing figure to a client as the 3-year price.
 
 How to read it. Lead with Recommended (server, endpoint protection, secure access, a 2-hour monthly
 on-site allowance, compliance and downtime factors flagged). Open at its START of $7,065. What the
