@@ -207,5 +207,5 @@ goes live.
   and only the primary address gets printed in client-facing templates. Choose your own primary
   and alias addresses and update the welcome email and every other template accordingly.
 
-Standing rule, unchanged: the 30-day arc and phase timing above are internal rhythm, not a
+Standing rule: the 30-day arc and phase timing above are internal rhythm, not a
 client promise. Do not commit dates in writing beyond what the onboarding project scope states.

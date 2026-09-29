@@ -153,7 +153,7 @@ already covered by promises this suite makes (msp-helpdesk, msp-offboarding).
 ## Setup Decisions
 
 The values below shipped as example defaults from a working MSP, and the items after them are
-still genuinely open questions upstream. Settle all of it for your own shop before this skill
+still open questions. Settle all of it for your own shop before this skill
 goes client-facing:
 
 - Patching: shipped default is workstations weekly automated with monthly enforced reboots;

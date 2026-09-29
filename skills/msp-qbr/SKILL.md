@@ -120,7 +120,7 @@ goes live.
 
 - **Cadence:** quarterly for every managed client ships as the example default. Decide your own
   cadence, and whether and when to flex smaller accounts to semi-annual.
-- **Scorecard areas:** the five areas below (Backups, Security, Updates, Hardware, Support) ship
+- **Scorecard areas:** the five areas above (Backups, Security, Updates, Hardware, Support) ship
   as the standing default set.
 
 The scorecard one-pager template ships in the kit at `templates/msp-qbr-scorecard-template.docx`; restyle it per msp-brand once your brand is set.
