@@ -91,18 +91,26 @@ Interview for the brand facts, then write them in.
    Delete example rows once real values exist; if a section is deferred, keep its example rows
    and mark them "deferred [date]" so the readiness check can tell a logged deferral from an
    untouched template.
-3. Propagate: replace every occurrence of each token across all of `skills/` except this file.
-   Find them by searching for the double-brace pattern. Two traps:
+3. Propagate: replace every occurrence of each token across all of `skills/` and `templates/`
+   except this file. Find them by searching for the double-brace pattern, or run
+   `python3 skills/msp-setup/scripts/find_tokens.py` from the kit root, which lists every token
+   left in both folders, including inside the Word and Excel files. Three traps:
    - `msp-pricing/scripts/price_quote.py` takes its company name from the `COMPANY_NAME`
      constant near the top of the file; set it there and confirm no other token remains in the
      script.
    - {{SERVICE_AREA}} appears in different grammatical frames ("serving businesses ..." versus
      "in ..."). After replacing, read each affected sentence and fix the grammar.
+   - The `templates/` files are Word and Excel documents, so a plain-text search of the folder
+     misses them, and so does a check that reads only the document body. The tokens sit whole
+     inside the files' XML parts: the body and footers of the Word files (`word/*.xml`) and
+     the text table of the spreadsheet (`xl/sharedStrings.xml`). Replace them there, or open
+     each file and edit it directly, then run `find_tokens.py` again to confirm.
 4. Ask the user to drop logo files into `msp-brand/` and record the filenames in the logo table
    (or log as a deferral).
 
-Exit condition: a search for the double-brace pattern across `skills/` (excluding this file)
-returns only tokens the user explicitly deferred, and those are listed in SETUP-STATE.md.
+Exit condition: a search for the double-brace pattern across `skills/` and `templates/`
+(excluding this file, and extracting the text of the Word and Excel files) returns only tokens
+the user explicitly deferred, and those are listed in SETUP-STATE.md.
 
 ## Phase 2: Pricing cost model
 
@@ -123,7 +131,10 @@ treatment.
    and rebuild `cost-model.md`'s worked example and any margin tables from its output.
 5. Consistency pass: confirm the script constants, cost-model catalog, break-fix card, and
    SKILL.md prose (including the Setup Decisions bullets that quote example figures) all state
-   the same numbers. Fix any stragglers.
+   the same numbers. Fix any stragglers. Include `templates/msp-monthly-review.xlsx`: its
+   effective-hourly-rate red line (shipped at $90/hr, the example remote floor) lives in a
+   conditional formatting rule on the Client Health sheet and in the note text on the
+   Reference sheet, not in a visible cell. Set both to the user's new remote floor.
 6. Review the output with the user: do the floor, anchor, and start numbers look like prices
    they would actually quote? Check the break-fix card's margin math against their loaded costs
    explicitly; the script does not price hourly work.
@@ -173,7 +184,9 @@ compliance-overlays note, and mark the phase.
 
 Run the full check and give a verdict. Every search excludes `msp-setup/SKILL.md`.
 
-1. Search `skills/` for the double-brace pattern: zero hits, or only logged deferrals.
+1. Search `skills/` and `templates/` for the double-brace pattern (run
+   `python3 skills/msp-setup/scripts/find_tokens.py`, which extracts the Word and Excel text):
+   zero hits, or only logged deferrals.
 2. Search `skills/` for "Defaults you must review": zero unflipped notes remain.
 3. Search msp-legal and the `templates/` docx files (extract their text) for square-bracket
    configuration placeholders that are one-time setup values rather than per-client fill-ins

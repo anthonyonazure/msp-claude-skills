@@ -143,5 +143,9 @@ goes live.
   above are industry data, not a choice to change; the 1.5 flag threshold is yours to set.
 - The revenue concentration flag at 25 percent of MRR ships as the example default.
 
-The monthly review spreadsheet ships in the kit at `templates/msp-monthly-review.xlsx`; update
-its threshold cells once you have settled your own thresholds above.
+The monthly review spreadsheet ships in the kit at `templates/msp-monthly-review.xlsx`. Its
+thresholds are not in visible cells: each one is a conditional formatting rule (the red and
+yellow fills) plus a note that states the limit. Once you have settled your own thresholds
+above, update both the rule and the note for each: effective hourly rate red below $90/hr,
+tickets per endpoint red above 1.5 and yellow above 1.0, utilization red above 80%, and
+revenue concentration red above 25% (all example defaults).
