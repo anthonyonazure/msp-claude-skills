@@ -154,7 +154,8 @@ review is done.
 For msp-security, settle Setup Decisions 1 through 7 here. Decision 8 (the state law section of
 `msp-security/references/compliance-overlays.md`) is an attorney item: leave it for Phase 4, and
 do not flip that reference file's note until it is filled in. If Decision 1 changes the EDR,
-SIEM, or MDR default, update msp-sales and msp-pricing to match in the same sitting.
+SIEM, or MDR default, update msp-sales and msp-pricing to match in the same sitting, including
+the endpoint agent cost in `msp-pricing/scripts/price_quote.py` and `references/cost-model.md`.
 
 Exit condition: every skill's decisions are settled or logged as deferrals, and every note
 except msp-legal's and msp-security's compliance-overlays note is flipped.

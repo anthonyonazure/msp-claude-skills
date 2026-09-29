@@ -96,8 +96,8 @@ Four overlapping phases. Days are targets, not law; the sequence is the law.
 ### Phase 2: Deploy and Discover (Days 3 to 10)
 
 - Deploy the RMM agent to every managed machine. Coordinate timing so nobody gets interrupted.
-- Roll out your endpoint protection (EDR/AV) platform to managed computers. Account-only users
-  have no managed endpoint; nothing deploys to their personal devices.
+- Roll out your endpoint protection platform to managed computers, at the tier msp-security
+  Setup Decision 1 sets. Account-only users have no managed endpoint; nothing deploys to their personal devices.
 - Macs in the fleet: enroll in your Mac device management (MDM) platform per what was sold.
 - **Document the environment as found, before changing it.** Asset inventory (RMM sweep plus a
   manual pass for what agents cannot see), server roles, backup status, patch levels, security

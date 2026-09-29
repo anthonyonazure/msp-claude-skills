@@ -80,9 +80,9 @@ steps, and evidence for each are in `references/client-baseline.md`.
 2. **Separate, named admin accounts.** No daily-driver account holds admin rights. No shared
    admin logins. A client-owned break-glass admin exists and is documented (inherited from
    msp-onboarding).
-3. **Endpoint protection (your EDR/AV platform) on every managed computer and server**,
-   reporting to {{COMPANY_NAME}}, tamper protection on (inherited from msp-pricing and
-   msp-onboarding).
+3. **Endpoint protection (your platform, at the tier Setup Decision 1 sets) on every managed
+   computer and server**, reporting to {{COMPANY_NAME}}, tamper protection on (inherited from
+   msp-pricing and msp-onboarding).
 4. **Supported operating systems and software only.** Anything past end of support is a
    finding with a replacement date or a signed waiver.
 5. **Patching on the msp-maintenance cadence**, including firmware on firewalls, switches,

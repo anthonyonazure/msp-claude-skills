@@ -76,7 +76,7 @@ under the small-item exception. See standing decisions.)
 
 | Add-on | Cost | Loaded onto |
 |--------|------|-------------|
-| Endpoint protection (EDR) | $1.30 | essentially every managed workstation/server |
+| Endpoint protection (plain tier by default; see msp-security Setup Decision 1) | $1.30 | essentially every managed workstation/server |
 | ZTNA (secure access) | $7.00 | endpoints needing secure access |
 | MDM (small business tier) | $5.00 | managed Macs (small business) |
 | MDM (enterprise tier) | $7.00 | managed Macs (enterprise) |
@@ -147,7 +147,7 @@ $10 rather than doubling to $20 over a ~$0.30 fee (57% GM after fees, above floo
 margin. The math the sheet performs is healthy; only the label is off. Renaming that column "2.5x
 multiplier (60% GM)" would prevent confusion.
 
-**Agent costs are not in the base cost.** Endpoint protection (EDR), ZTNA, and MDM are real
+**Agent costs are not in the base cost.** Endpoint protection, ZTNA, and MDM are real
 per-endpoint costs the Managed Services base does not capture. The configurator loads them on
 demand. Folding at least endpoint protection into the standard workstation cost would make the
 anchor honest by default.

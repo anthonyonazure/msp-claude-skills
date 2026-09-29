@@ -57,7 +57,7 @@ blanket alignment.
 | Control | Tier | Verify | Evidence |
 |---|---|---|---|
 | RMM agent on every managed device, reporting | T1 (inherited) | RMM device list versus asset inventory | Report |
-| Endpoint protection (your EDR/AV platform) on every managed computer and server, tamper protection on, reporting | T1 (inherited) | Console coverage versus asset inventory | Coverage report |
+| Endpoint protection (your platform, at the tier Setup Decision 1 sets) on every managed computer and server, tamper protection on, reporting | T1 (inherited) | Console coverage versus asset inventory | Coverage report |
 | Full-disk encryption (the operating system's built-in encryption) on every laptop, desktops where practical; recovery keys escrowed | T1 | RMM or Mac MDM encryption report | Report |
 | Host firewall on | T1 | RMM policy | Report |
 | Screen lock after inactivity (recommended default: 15 minutes or less) | T1 | Policy | Report |
@@ -157,7 +157,7 @@ Same day as the departure (or the moment of an involuntary termination):
 | Alerts for risky sign-ins, new admin role assignments, new inbox forwarding rules, and mass file deletion reach {{COMPANY_NAME}} | T1 | Alert policy review | Screenshot |
 | Endpoint protection and backup alerts reach {{COMPANY_NAME}} and map into msp-maintenance triage | T1 (inherited) | Alert routing | Configuration |
 | Firewall logs retained where the device allows | T1 | Device setting | Screenshot |
-| Centralized log collection or SIEM | T2 via partner only (shipped default: no in-house SIEM) | n/a | n/a |
+| Centralized log collection or SIEM | Not offered (shipped default, see Setup Decision 1); scope case by case if a client or insurer requires it | n/a | n/a |
 
 ## 12. Documentation and Governance
 

@@ -82,8 +82,9 @@ support people who do not have a company computer without charging them like the
 **Recurring, per device (monthly):** server, mobile device, network base fee, firewall or router,
 switch, wireless access point, camera, printer (business-class, networked only), special software.
 
-**Per-endpoint add-ons (load onto the devices that need them):** endpoint protection (EDR), ZTNA
-(secure access), MDM small-business or MDM enterprise tier (Mac management). These are real costs;
+**Per-endpoint add-ons (load onto the devices that need them):** endpoint protection (at the tier
+msp-security Setup Decision 1 sets; plain, non-EDR by default), ZTNA (secure access), MDM
+small-business or MDM enterprise tier (Mac management). These are real costs;
 loading them keeps the anchor honest instead of quietly eating margin. They do not apply to
 account-only users, who have no managed endpoint.
 
@@ -115,7 +116,7 @@ breaks the margin, so ask rather than assume. The `msp-sales` discovery framewor
   factor.
 - A real need for hands on site pulls in an on-site allowance.
 - Servers, cameras, special software: include only what they actually run.
-- Endpoint protection (EDR) belongs on essentially every managed computer (not account-only
+- Endpoint protection belongs on essentially every managed computer (not account-only
   users).
 
 **Step 3: Assemble two or three options.** Not standard tiers: options you built for this client.

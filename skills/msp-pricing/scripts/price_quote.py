@@ -77,6 +77,9 @@ UNITS = {
 # best-effort hourly only. $40 anchor, $30 floor. See references/cost-model.md.
 
 # Per endpoint agent COSTS (Agent Prices sheet). Load onto devices that use them.
+# "edr" is the endpoint protection agent. The key name is kept so existing client files still
+# work; the shipped tier is plain (non-EDR) per msp-security Setup Decision 1. If you adopt an
+# EDR tier there, set its real per-endpoint cost here.
 AGENTS = {"edr": 1.30, "ztna": 7.00, "mdm_sb": 5.00, "mdm_ent": 7.00}
 
 # --- Pricing standards ----------------------------------------------------------
